@@ -18,7 +18,7 @@ class SRData(data.Dataset):
         self.split = 'train' if train else 'test'
         self.do_eval = True
         self.benchmark = benchmark
-        self.input_large = (args.model == 'VDSR')
+        self.input_large = (args.model == 'VDSR' or args.model == 'TASR')
         self.scale = args.scale
         self.idx_scale = 0
         
@@ -153,5 +153,5 @@ class SRData(data.Dataset):
         if not self.input_large:
             self.idx_scale = idx_scale
         else:
-            self.idx_scale = random.randint(0, len(self.scale) - 1)
+            self.idx_scale = idx_scale
 
