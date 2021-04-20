@@ -19,7 +19,7 @@ parser.add_argument('--seed', type=int, default=1,
                     help='random seed')
 
 # Data specifications
-parser.add_argument('--dir_data', type=str, default='../../../dataset',
+parser.add_argument('--dir_data', type=str, default='../dataset',
                     help='dataset directory')
 parser.add_argument('--dir_demo', type=str, default='../test',
                     help='demo image directory')
@@ -81,6 +81,12 @@ parser.add_argument('--n_resgroups', type=int, default=10,
                     help='number of residual groups')
 parser.add_argument('--reduction', type=int, default=16,
                     help='number of feature maps reduction')
+
+# Option for Recursive Residual Group (RRG)
+parser.add_argument('--n_rrg', type=int, default=4,
+                    help='number of recursive residual group')
+parser.add_argument('--n_dab', type=int, default=8,
+                    help='number of dual attention block per RRG')
 
 # Training specifications
 parser.add_argument('--reset', action='store_true',
