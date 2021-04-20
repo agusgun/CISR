@@ -64,3 +64,12 @@ def set_template(args):
         args.n_rrg = 4
         args.n_dab = 8
         args.lr = 1e-4
+    
+    if args.template.find('Sultan') >= 0:
+        args.model = 'Sultan'
+        args.epochs = 200
+        args.n_srg = 4
+        args.n_crg = 4
+        args.n_sab = 8
+        args.n_cab = 8
+        args.lr = 1e-4

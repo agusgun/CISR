@@ -88,6 +88,16 @@ parser.add_argument('--n_rrg', type=int, default=4,
 parser.add_argument('--n_dab', type=int, default=8,
                     help='number of dual attention block per RRG')
 
+# Option for Separate Residual Group (SRG)
+parser.add_argument('--n_crg', type=int, default=4,
+                    help='number of channel residual group')
+parser.add_argument('--n_cab', type=int, default=8,
+                    help='number of channel attention block')
+parser.add_argument('--n_srg', type=int, default=4,
+                    help='number of spatial residual group')
+parser.add_argument('--n_sab', type=int, default=8,
+                    help='number of spatial attention block')
+
 # Training specifications
 parser.add_argument('--reset', action='store_true',
                     help='reset the training')
