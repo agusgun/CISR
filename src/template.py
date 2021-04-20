@@ -51,3 +51,16 @@ def set_template(args):
         args.patch_size = 41
         args.lr = 1e-1
 
+    if args.template.find('TASR') >= 0:
+        args.model = 'TASR'
+        args.epochs = 200
+        args.n_rrg = 4
+        args.n_dab = 8
+        args.lr = 1e-4
+
+    if args.template.find('TSR') >= 0:
+        args.model = 'TSR'
+        args.epochs = 200
+        args.n_rrg = 4
+        args.n_dab = 8
+        args.lr = 1e-4
