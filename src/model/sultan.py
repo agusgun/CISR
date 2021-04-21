@@ -217,12 +217,13 @@ class Sultan(nn.Module):
         out = self.body(x)
         out = self.conv_last(out)
         out += x
-
-        out = self.tail(out)
-        out = self.refinement_first(out)
         
-        out2 = self.refinement(out)
-        out2 = out2 + out
+        out_ir = self.tail(out)
         
-        out2 = self.refinement_last(out2)
-        return out2
+        out2 = self.refinement_first(out_ir)
+        
+        out_sr = self.refinement(out2)
+        out_sr = out_sr + out2
+        
+        out_sr = self.refinement_last(out_sr)
+        return out_ir, out_sr

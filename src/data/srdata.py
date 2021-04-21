@@ -19,6 +19,7 @@ class SRData(data.Dataset):
         self.do_eval = True
         self.benchmark = benchmark
         self.input_large = (args.model == 'VDSR' or args.model == 'TASR')
+        self.use_lq = args.use_lq_train
         self.scale = args.scale
         self.idx_scale = 0
         
@@ -86,7 +87,11 @@ class SRData(data.Dataset):
         self.dir_hr = os.path.join(self.apath, 'HR')
         self.dir_lr = os.path.join(self.apath, 'LR_bicubic')
         if self.input_large: self.dir_lr += 'L'
-        self.ext = ('.png', '.png')
+        if self.use_lq: self.dir_lr += 'LQ'
+        if self.use_lq:
+            self.ext = ('.png', '.jpg')
+        else:
+            self.ext = ('.png', '.png')
 
     def _check_and_load(self, ext, img, f, verbose=True):
         if not os.path.isfile(f) or ext.find('reset') >= 0:
@@ -119,6 +124,7 @@ class SRData(data.Dataset):
         idx = self._get_index(idx)
         f_hr = self.images_hr[idx]
         f_lr = self.images_lr[self.idx_scale][idx]
+        # print(f_lr, f_hr, idx)
 
         filename, _ = os.path.splitext(os.path.basename(f_hr))
         if self.args.ext == 'img' or self.benchmark:

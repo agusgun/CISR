@@ -54,3 +54,6 @@ python main.py --model EDSR --scale 2 --patch_size 96 --save edsr_baseline_x2 --
 # RCAN_BIX8_G10R20P48, input=48x48, output=384x384
 #python main.py --template RCAN --save RCAN_BIX8_G10R20P48 --scale 8 --reset --save_results --patch_size 384 --pre_train ../experiment/model/RCAN_BIX2.pt
 
+# python main.py --scale 2 --save TrainLQTestNormal --model Sultan --epochs 200 --batch_size 16 --data_range 001-800 --patch_size 64 --reset --data_test Set5 --auxiliary_out --use_lq_train
+# python main.py --scale 2 --save TestLQ --model Sultan --epochs 200 --batch_size 16 --data_range 001-800 --patch_size 64 --reset --data_test Set5LQ --auxiliary_out --use_lq_test
+# python main.py --scale 2 --save TrainLQTestLQ --model Sultan --epochs 200 --batch_size 16 --data_range 001-800 --patch_size 64 --reset --data_test Set5LQ --auxiliary_out --use_lq_train --use_lq_test

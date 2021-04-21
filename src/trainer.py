@@ -25,6 +25,8 @@ class Trainer():
 
         self.error_last = 1e8
 
+        self.auxiliary_out = args.auxiliary_out
+
     def train(self):
         self.loss.step()
         epoch = self.optimizer.get_last_epoch() + 1
@@ -45,9 +47,16 @@ class Trainer():
             timer_model.tic()
 
             self.optimizer.zero_grad()
-            sr = self.model(lr, 0)
-            loss = self.loss(sr, hr)
-            loss.backward()
+            if self.auxiliary_out:
+                # print('using auxiliary')
+                ir, sr = self.model(lr, 0)
+                loss = self.loss(ir, sr, hr)
+                loss.backward()
+            else:
+                sr = self.model(lr, 0)
+                loss = self.loss(sr, hr)
+                loss.backward()
+
             if self.args.gclip > 0:
                 utils.clip_grad_value_(
                     self.model.parameters(),
@@ -88,8 +97,13 @@ class Trainer():
                 d.dataset.set_scale(idx_scale)
                 for lr, hr, filename in tqdm(d, ncols=80):
                     lr, hr = self.prepare(lr, hr)
-                    sr = self.model(lr, idx_scale)
-                    sr = utility.quantize(sr, self.args.rgb_range)
+                    sr = None
+                    if self.auxiliary_out:
+                        _, sr = self.model(lr, idx_scale)
+                        sr = utility.quantize(sr, self.args.rgb_range)
+                    else:
+                        sr = self.model(lr, idx_scale)
+                        sr = utility.quantize(sr, self.args.rgb_range)
 
                     save_list = [sr]
                     self.ckp.log[-1, idx_data, idx_scale] += utility.calc_psnr(

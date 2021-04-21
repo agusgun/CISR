@@ -115,7 +115,12 @@ parser.add_argument('--test_only', action='store_true',
                     help='set this option to test the model')
 parser.add_argument('--gan_k', type=int, default=1,
                     help='k value for adversarial loss')
-
+parser.add_argument('--auxiliary_out', action='store_true', 
+                    help='set this option to use loss with auxiliary')
+parser.add_argument('--use_lq_train', action='store_true',
+                    help='use low quality data for training (jpg) (resaved at 10% quality)')
+parser.add_argument('--use_lq_test', action='store_true',
+                    help='use low quality data for test (jpg) (resaved at 10% quality)')
 # Optimization specifications
 parser.add_argument('--lr', type=float, default=1e-4,
                     help='learning rate')

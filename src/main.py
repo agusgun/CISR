@@ -21,7 +21,12 @@ def main():
         if checkpoint.ok:
             loader = data.Data(args)
             _model = model.Model(args, checkpoint)
-            _loss = loss.Loss(args, checkpoint) if not args.test_only else None
+            _loss = None
+            if not args.test_only:
+                if args.auxiliary_out:
+                    _loss = loss.ManualLossWithAuxiliary(args, checkpoint)
+                else:
+                    _loss = loss.Loss(args, checkpoint)
             t = Trainer(args, loader, _model, _loss, checkpoint)
             while not t.terminate():
                 t.train()

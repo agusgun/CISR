@@ -1,3 +1,4 @@
+# script to upscale image manually
 import os
 import cv2 
 import argparse
