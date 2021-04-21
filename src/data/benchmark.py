@@ -13,7 +13,6 @@ class Benchmark(srdata.SRData):
         super(Benchmark, self).__init__(
             args, name=name, train=train, benchmark=True
         )
-        self.use_lq = args.use_lq_test
 
     def _set_filesystem(self, dir_data):
         self.apath = os.path.join(dir_data, 'benchmark', self.name)
@@ -22,7 +21,7 @@ class Benchmark(srdata.SRData):
             self.dir_lr = os.path.join(self.apath, 'LR_bicubicL')
         else:
             self.dir_lr = os.path.join(self.apath, 'LR_bicubic')
-        if self.use_lq:
+        if self.use_lq_test:
             self.ext = ('', '.jpg')
         else:
             self.ext = ('', '.png')

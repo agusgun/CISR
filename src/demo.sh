@@ -57,3 +57,5 @@ python main.py --model EDSR --scale 2 --patch_size 96 --save edsr_baseline_x2 --
 # python main.py --scale 2 --save TrainLQTestNormal --model Sultan --epochs 200 --batch_size 16 --data_range 001-800 --patch_size 64 --reset --data_test Set5 --auxiliary_out --use_lq_train
 # python main.py --scale 2 --save TestLQ --model Sultan --epochs 200 --batch_size 16 --data_range 001-800 --patch_size 64 --reset --data_test Set5LQ --auxiliary_out --use_lq_test
 # python main.py --scale 2 --save TrainLQTestLQ --model Sultan --epochs 200 --batch_size 16 --data_range 001-800 --patch_size 64 --reset --data_test Set5LQ --auxiliary_out --use_lq_train --use_lq_test
+# python main.py --scale 2 --save RDNTrainLQTestLQ --model RDN --epochs 200 --batch_size 16 --data_range 001-800 --patch_size 64 --reset --data_test Set5LQ --use_lq_train --use_lq_test
+# python main.py --data_test Set5LQ --data_range 801-900 --scale 2 --pre_train ../experiment/SultanFirstVersion/model/model_latest.pt --test_only --use_lq_test
