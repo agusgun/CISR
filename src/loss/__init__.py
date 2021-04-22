@@ -157,13 +157,13 @@ class ManualLossWithAuxiliary(nn.modules.loss._Loss):
         )
         self.intermediate_loss.append({
             'type': 'InterVGG',
-            'weight': float(1),
+            'weight': float(0.5),
             'function': vgg_loss_function,
         })
         self.intermediate_loss.append({
-            'type': 'InterL2',
-            'weight': float(1),
-            'function': nn.MSELoss(),
+            'type': 'InterL1',
+            'weight': float(0.5),
+            'function': nn.L1Loss(),
         })
         self.intermediate_loss.append({'type': 'InterTotal', 'weight': 0, 'function': None})
         

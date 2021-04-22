@@ -10,6 +10,9 @@ from trainer import Trainer
 torch.manual_seed(args.seed)
 checkpoint = utility.checkpoint(args)
 
+def count_parameters(model):
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
 def main():
     global model
     if args.data_test == ['video']:
@@ -21,6 +24,7 @@ def main():
         if checkpoint.ok:
             loader = data.Data(args)
             _model = model.Model(args, checkpoint)
+            print("n_parameter:", count_parameters(_model))
             _loss = None
             if not args.test_only:
                 if args.auxiliary_out:

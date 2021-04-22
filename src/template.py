@@ -65,11 +65,11 @@ def set_template(args):
         args.n_dab = 8
         args.lr = 1e-4
     
-    if args.template.find('Sultan') >= 0:
-        args.model = 'Sultan'
+    if args.template.find('CISR') >= 0:
+        args.model = 'CISR'
         args.epochs = 200
-        args.n_srg = 4
-        args.n_crg = 4
-        args.n_sab = 8
-        args.n_cab = 8
+        args.n_coarse_darg = 4
+        args.n_fine_darg = 4
+        args.n_coarse_dab = 8
+        args.n_fine_dab = 8
         args.lr = 1e-4
