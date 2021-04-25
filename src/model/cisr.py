@@ -160,13 +160,13 @@ class CISR(nn.Module):
         scale = args.scale[0]
         self.auxiliary_out = args.auxiliary_out
 
-        self.conv_first = conv(in_channel, n_feat, 3)
+        self.shallow_feature_extraction = conv(in_channel, n_feat, 3)
 
-        modules_coarse_body = []
+        modules_coarse_rirg = []
         for i in range(n_coarse_darg):
-            modules_coarse_body.append(PDABRG(n_feat, reduction, n_coarse_dab))
-        self.coarse_body = nn.Sequential(*modules_coarse_body)
-        self.conv_last = conv(n_feat, n_feat, 3)
+            modules_coarse_rirg.append(PDABRG(n_feat, reduction, n_coarse_dab))
+        modules_coarse_rirg.append(conv(n_feat, n_feat, 3))
+        self.coarse_rirg = nn.Sequential(*modules_coarse_rirg)
 
         modules_coarse_upsampler = [
             common.Upsampler(conv, scale, n_feat, act=False),
@@ -174,25 +174,26 @@ class CISR(nn.Module):
         self.coarse_upsampler = nn.Sequential(*modules_coarse_upsampler)
         
         self.refinement_first = conv(out_channel, n_feat, 3) # don't use this (the first network)
-        modules_refinement = []
+        modules_fine_rirg = []
         for i in range(n_fine_darg):
-            modules_refinement.append(SDABRG(n_feat, reduction, n_fine_dab))
-        self.refinement = nn.Sequential(*modules_refinement)
-        
+            modules_fine_rirg.append(SDABRG(n_feat, reduction, n_fine_dab))
+        self.fine_rirg = nn.Sequential(*modules_fine_rirg)
         self.refinement_last = conv(n_feat, out_channel, 3)
 
     def forward(self, x):
-        x = self.conv_first(x)
-        coarse = self.coarse_body(x)
-        coarse = self.conv_last(coarse)
+        x = self.shallow_feature_extraction(x)
+        coarse = self.coarse_rirg(x)
         coarse += x
         
         coarse = self.coarse_upsampler(coarse)
-        x = self.refinement_first(coarse)
         
-        fine = self.refinement(x)
-        fine += x
+        fine = self.refinement_first(coarse)
+        fine = self.fine_rirg(fine)
         fine = self.refinement_last(fine)
+        fine += coarse
+
+        #TODO: fix the network so it is simmilar to the network created in draw io
+
         if self.auxiliary_out:
             return coarse, fine
         else:

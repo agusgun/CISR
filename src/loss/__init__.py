@@ -150,29 +150,28 @@ class ManualLossWithAuxiliary(nn.modules.loss._Loss):
 
         # for intermediate
         self.intermediate_loss = []
+        self.intermediate_loss.append({
+            'type': 'InterL2',
+            'weight': float(0.1),
+            'function': nn.MSELoss(),
+        })
+        
+        # for output
         vgg_module = import_module('loss.vgg')
         vgg_loss_function = getattr(vgg_module, 'VGG')(
             '54',
             rgb_range = args.rgb_range,
         )
-        self.intermediate_loss.append({
-            'type': 'InterVGG',
-            'weight': float(0.5),
-            'function': vgg_loss_function,
-        })
-        self.intermediate_loss.append({
-            'type': 'InterL1',
-            'weight': float(0.5),
-            'function': nn.L1Loss(),
-        })
-        self.intermediate_loss.append({'type': 'InterTotal', 'weight': 0, 'function': None})
-        
-        # for output
         self.output_loss = []
         self.output_loss.append({
             'type': 'OutL1',
             'weight': float(1),
             'function': nn.L1Loss(),
+        })
+        self.output_loss.append({
+            'type': 'OutVGG',
+            'weight': float(1),
+            'function': vgg_loss_function,
         })
         self.output_loss.append({'type': 'Total', 'weight': 0, 'function': None})
 
