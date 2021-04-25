@@ -213,16 +213,13 @@ class ManualLossWithAuxiliary(nn.modules.loss._Loss):
         # hr: ground truth
         losses = []
         
-        intermediate_loss_sum = 0.0
         for i, l in enumerate(self.intermediate_loss):
             if l['function'] is not None:
                 loss = l['function'](ir, hr)
                 effective_loss = l['weight'] * loss
                 losses.append(effective_loss)
                 self.log[-1, i] += effective_loss.item()
-                intermediate_loss_sum += effective_loss.item()
-        self.log[-1, len(self.intermediate_loss) - 1] += intermediate_loss_sum
-        
+
         for i, l in enumerate(self.output_loss):
             if l['function'] is not None:
                 loss = l['function'](sr, hr)
