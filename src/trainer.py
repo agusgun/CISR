@@ -26,6 +26,8 @@ class Trainer():
         self.error_last = 1e8
 
         self.auxiliary_out = args.auxiliary_out
+        self.first_stage_training = args.first_stage_training
+        self.second_stage_training = args.second_stage_training
 
     def train(self):
         self.loss.step()
@@ -52,6 +54,10 @@ class Trainer():
                 ir, sr = self.model(lr, 0)
                 loss = self.loss(ir, sr, hr)
                 loss.backward()
+            elif self.first_stage_training:
+                ir = self.model(lr, 0)
+                loss = self.loss(ir, hr)
+                loss.backward()
             else:
                 sr = self.model(lr, 0)
                 loss = self.loss(sr, hr)
@@ -75,6 +81,11 @@ class Trainer():
                     timer_data.release()))
 
             timer_data.tic()
+
+        print('After Each Epoch:')
+        if hasattr(self.model.model, 'shallow_feature_extraction') and hasattr(self.model.model, 'refinement_last'):
+            print(self.model.model.shallow_feature_extraction.weight)
+            print(self.model.model.refinement_last.weight)
 
         self.loss.end_log(len(self.loader_train))
         self.error_last = self.loss.log[-1, -1]

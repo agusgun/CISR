@@ -99,8 +99,16 @@ class Model(nn.Module):
                 **kwargs
             )
 
+        print('First Load:')
         if load_from:
             self.model.load_state_dict(load_from, strict=False)
+            if hasattr(self.model, 'shallow_feature_extraction') and hasattr(self.model, 'refinement_last'):
+                print(self.model.shallow_feature_extraction.weight)
+                print(self.model.refinement_last.weight)
+        else:            
+            if hasattr(self.model, 'shallow_feature_extraction') and hasattr(self.model, 'refinement_last'):
+                print(self.model.shallow_feature_extraction.weight)
+                print(self.model.refinement_last.weight)
 
     def forward_chop(self, *args, shave=10, min_size=160000):
         scale = 1 if self.input_large else self.scale[self.idx_scale]

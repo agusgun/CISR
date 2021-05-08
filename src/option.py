@@ -89,11 +89,11 @@ parser.add_argument('--n_dab', type=int, default=8,
                     help='number of dual attention block per RRG')
 
 # Option for Separate Residual Group (SRG)
-parser.add_argument('--n_coarse_darg', type=int, default=3,
+parser.add_argument('--n_coarse_darg', type=int, default=4,
                     help='number of dual attention residual group for coarse network')
 parser.add_argument('--n_coarse_dab', type=int, default=8,
                     help='number of dual attention block for coarse network')
-parser.add_argument('--n_fine_darg', type=int, default=3,
+parser.add_argument('--n_fine_darg', type=int, default=2,
                     help='number of dual attention residual group for fine network')
 parser.add_argument('--n_fine_dab', type=int, default=8,
                     help='number of dual attention block for fine network')
@@ -121,6 +121,11 @@ parser.add_argument('--use_lq_train', action='store_true',
                     help='use low quality data for training (jpg) (resaved at 10% quality)')
 parser.add_argument('--use_lq_test', action='store_true',
                     help='use low quality data for test (jpg) (resaved at 10% quality)')
+parser.add_argument('--first_stage_training', action='store_true',
+                    help='first stage training by using only intermediate result')
+parser.add_argument('--second_stage_training', action='store_true',
+                    help='second stage training by using only output result')
+
 # Optimization specifications
 parser.add_argument('--lr', type=float, default=1e-4,
                     help='learning rate')

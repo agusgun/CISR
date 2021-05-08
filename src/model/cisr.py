@@ -159,6 +159,8 @@ class CISR(nn.Module):
         reduction = 8
         scale = args.scale[0]
         self.auxiliary_out = args.auxiliary_out
+        self.first_stage_training = args.first_stage_training
+        self.second_stage_training = args.second_stage_training
 
         self.shallow_feature_extraction = conv(in_channel, n_feat, 3)
 
@@ -187,6 +189,9 @@ class CISR(nn.Module):
         
         coarse = self.coarse_upsampler(coarse)
         
+        if self.first_stage_training:
+            return coarse
+
         fine = self.refinement_first(coarse)
         fine = self.fine_rirg(fine)
         fine = self.refinement_last(fine)
@@ -194,7 +199,5 @@ class CISR(nn.Module):
 
         #TODO: fix the network so it is simmilar to the network created in draw io
 
-        if self.auxiliary_out:
-            return coarse, fine
-        else:
+        if self.second_stage_training:
             return fine

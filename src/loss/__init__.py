@@ -152,7 +152,7 @@ class ManualLossWithAuxiliary(nn.modules.loss._Loss):
         self.intermediate_loss = []
         self.intermediate_loss.append({
             'type': 'InterL2',
-            'weight': float(0.1),
+            'weight': float(0.05),
             'function': nn.MSELoss(),
         })
         
