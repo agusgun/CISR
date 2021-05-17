@@ -97,6 +97,12 @@ parser.add_argument('--n_fine_darg', type=int, default=2,
                     help='number of dual attention residual group for fine network')
 parser.add_argument('--n_fine_dab', type=int, default=8,
                     help='number of dual attention block for fine network')
+parser.add_argument('--coarse_block', type=str, default='parallel', choices=['parallel', 'sequential'],
+                    help='type of RRG block in coarse network')
+parser.add_argument('--fine_block', type=str, default='sequential', choices=['parallel', 'sequential'],
+                    help='type of RRG block in refinement network')
+parser.add_argument('--metric', type=str, default='psnr', choices=['psnr', 'ssim'],
+                    help='metric used to compute the result')
 
 # Training specifications
 parser.add_argument('--reset', action='store_true',

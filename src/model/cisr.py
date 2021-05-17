@@ -165,8 +165,14 @@ class CISR(nn.Module):
         self.shallow_feature_extraction = conv(in_channel, n_feat, 3)
 
         modules_coarse_rirg = []
-        for i in range(n_coarse_darg):
-            modules_coarse_rirg.append(PDABRG(n_feat, reduction, n_coarse_dab))
+        if args.coarse_block == 'parallel':
+            print('Parallel Dual Attention Block for Coarse Network')
+            for i in range(n_coarse_darg):
+                modules_coarse_rirg.append(PDABRG(n_feat, reduction, n_coarse_dab))
+        elif args.coarse_block == 'sequential':
+            print('Sequential Dual Attention Block for Coarse Network')
+            for i in range(n_coarse_darg):
+                modules_coarse_rirg.append(SDABRG(n_feat, reduction, n_coarse_dab))
         modules_coarse_rirg.append(conv(n_feat, n_feat, 3))
         self.coarse_rirg = nn.Sequential(*modules_coarse_rirg)
 
@@ -177,8 +183,14 @@ class CISR(nn.Module):
         
         self.refinement_first = conv(out_channel, n_feat, 3) # don't use this (the first network)
         modules_fine_rirg = []
-        for i in range(n_fine_darg):
-            modules_fine_rirg.append(SDABRG(n_feat, reduction, n_fine_dab))
+        if args.fine_block == 'parallel':
+            print('Parallel Dual Attention Block for Refinement Network')
+            for i in range(n_fine_darg):
+                modules_fine_rirg.append(PDABRG(n_feat, reduction, n_fine_dab))
+        elif args.fine_block == 'sequential':
+            print('Sequential Dual Attention Block for Refinement Network')
+            for i in range(n_fine_darg):
+                modules_fine_rirg.append(SDABRG(n_feat, reduction, n_fine_dab))
         self.fine_rirg = nn.Sequential(*modules_fine_rirg)
         self.refinement_last = conv(n_feat, out_channel, 3)
 
