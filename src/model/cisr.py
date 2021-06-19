@@ -1,3 +1,4 @@
+### Our Model ###
 import cv2
 import torch
 import torch.nn as nn
@@ -13,9 +14,6 @@ def conv(in_channels, out_channels, kernel_size, bias=True):
     return nn.Conv2d(
         in_channels, out_channels, kernel_size,
         padding=(kernel_size//2), bias=bias)
-
-
-### RRG Based Model from CycleISP ###
 
 ### Spatial Attention from CBAM
 class BasicConv(nn.Module):
