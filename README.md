@@ -10,7 +10,7 @@ Our project presentation is available [[here](https://drive.google.com/file/d/1J
 
 <!-- TODO: Add Figure 2 in the paper here -->
 
-<img src="./figs/CISRNet.png" alt="baby_HR"/>
+<img src="./figs/CISRNet.png" alt="baby_HR" width="1500"/>
 
 ## Package Installations
 We recoommend using [conda](https://www.anaconda.com/products/individual) for installation:
