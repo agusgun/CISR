@@ -67,7 +67,8 @@ python resave_jpeg.py --input_dir=../../test/Set5/LR_bicubic/X2 \
                       --quality=10
 ```
 
-Note: In case of Manga109 dataset, we are only provided with the HR images. To generate the LR images, it is possible to head to `/src/data` directory and run the following script:
+Note: In case of Manga109 dataset, we are only provided with the HR images. To generate the LR images with degradation, please refer to our paper and use bicubic downsampling.
+
 
 ## Training Code
 <!-- Further explanations regarding ways of training our model will be available here -->
@@ -207,7 +208,3 @@ More qualitative results for scale factor of 4 between different methods are ava
   year={2022}
 }
 ```
-
-## TO-DO
-
-- [ ] Provide additional instructions on how to generate `LR_bicubic` images from the `HR` images (given the unavailability of `LR_bicubic` images).
