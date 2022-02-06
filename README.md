@@ -172,7 +172,7 @@ Note:
 Set5 (x4)
 | HR | VDSR | RDN | RCAN | CISR (ours) |
 |:--:|:----:|:---:|:----:|:-----------:|
-| <img src="./additional_results/HR/Set5/baby.png" alt="baby_HR" style="height: 300px; width:300px;"/> | <img src="./additional_results/VDSR/Set5/baby_x4_SR.png" alt="baby_VDSR" style="height: 300px; width:300px;"/> | <img src="./additional_results/RDN/Set5/baby_x4_SR.png" alt="baby_RDN" style="height: 300px; width:300px;"/> | <img src="./additional_results/RCAN/Set5/baby_x4_SR.png" alt="baby_RCAN" style="height: 300px; width:300px;"/> | <img src="./additional_results/CISR/Set5/baby_x4_SR.png" alt="baby_CISR" style="height: 300px; width:300px;"/> |
+| <img src="./additional_results/HR/Set5/baby.png" alt="baby_HR" style="height: 200px; width:200px;"/> | <img src="./additional_results/VDSR/Set5/baby_x4_SR.png" alt="baby_VDSR" style="height: 200px; width:200px;"/> | <img src="./additional_results/RDN/Set5/baby_x4_SR.png" alt="baby_RDN" style="height: 200px; width:200px;"/> | <img src="./additional_results/RCAN/Set5/baby_x4_SR.png" alt="baby_RCAN" style="height: 200px; width:200px;"/> | <img src="./additional_results/CISR/Set5/baby_x4_SR.png" alt="baby_CISR" style="height: 200px; width:200px;"/> |
 
 Set14 (x4)
 | HR | VDSR | RDN | RCAN | CISR (ours) |
