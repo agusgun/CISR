@@ -81,7 +81,7 @@ The following steps provide ways to perform first-stage training for our model:
 ```bash
 cd src
 ```
-2. Run the following script to perform first-stage training and save training results (model weights, image validation results, configs, logs, etc.) in `experiments/CISR_first_stage/` for generating model that performs image upscaling for a factor of 2.
+2. Run the following script to perform first-stage training and save training results (model weights, image validation results, configs, logs, etc.) in `./experiments/CISR_first_stage/` for generating model that performs image upscaling for a factor of 2.
 ```python
 python main.py --scale 2 \
                --save CISR_first_stage \
