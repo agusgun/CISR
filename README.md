@@ -3,8 +3,8 @@
 
 This is the official repository of "CISRNet: Compressed Image Super-Resolution Network".
 
-We provide the training and testing code along with the trained weights and the test dataset.
-If you found this repository useful, please consider citing our paper [[arXiv](https://arxiv.org/abs/2201.06045)].
+We provide the training and testing code for generating CISRNet.
+If you found this repository useful, please check our paper in [[arXiv](https://arxiv.org/abs/2201.06045)].
 
 Our project presentation is available [[here](https://drive.google.com/file/d/1J1DgLb-LlRnwumdKkebopzZoxyDaASFs/view)]
 
@@ -13,7 +13,7 @@ Our project presentation is available [[here](https://drive.google.com/file/d/1J
 <img src="./figs/CISRNet.png" alt="baby_HR" width="1500"/>
 
 ## Package Installations
-We recoommend using [conda](https://www.anaconda.com/products/individual) for installation:
+We recommend using [conda](https://www.anaconda.com/products/individual) for installation:
 ```bash
 conda env create -f environment.yml
 conda activate cisr
@@ -67,7 +67,8 @@ python resave_jpeg.py --input_dir=../../test/Set5/LR_bicubic/X2 \
                       --quality=10
 ```
 
-Note: In case of Manga109 dataset, we are only provided with the HR images. To generate the LR images, it is possible to head to `/src/data` directory and run the following script:
+Note: In case of Manga109 dataset, we are only provided with the HR images. To generate the LR images with degradation, please refer to our paper and use bicubic downsampling.
+
 
 ## Training Code
 <!-- Further explanations regarding ways of training our model will be available here -->
@@ -80,7 +81,7 @@ The following steps provide ways to perform first-stage training for our model:
 ```bash
 cd src
 ```
-2. Run the following script to perform first-stage training and save training results (model weights, image validation results, configs, logs, etc.) in `experiments/CISR_first_stage/` for generating model that performs image upscaling for a factor of 2.
+2. Run the following script to perform first-stage training and save training results (model weights, image validation results, configs, logs, etc.) in `./experiments/CISR_first_stage/` for generating model that performs image upscaling for a factor of 2.
 ```python
 python main.py --scale 2 \
                --save CISR_first_stage \
@@ -207,7 +208,3 @@ More qualitative results for scale factor of 4 between different methods are ava
   year={2022}
 }
 ```
-
-## TO-DO
-
-- [ ] Provide additional instructions on how to generate `LR_bicubic` images from the `HR` images (given the unavailability of `LR_bicubic` images).
