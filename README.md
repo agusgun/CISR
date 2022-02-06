@@ -13,7 +13,7 @@ Our project presentation is available [[here](https://drive.google.com/file/d/1J
 <img src="./figs/CISRNet.png" alt="baby_HR" width="1500"/>
 
 ## Package Installations
-We recommmend using [conda](https://www.anaconda.com/products/individual) for installation:
+We recommend using [conda](https://www.anaconda.com/products/individual) for installation:
 ```bash
 conda env create -f environment.yml
 conda activate cisr
