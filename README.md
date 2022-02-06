@@ -206,7 +206,6 @@ More qualitative results for scale factor of 4 between different methods are ava
   journal={arXiv preprint arXiv:2201.06045},
   year={2022}
 }
-
 ```
 
 ## TO-DO
