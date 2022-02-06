@@ -3,8 +3,8 @@
 
 This is the official repository of "CISRNet: Compressed Image Super-Resolution Network".
 
-We provide the training and testing code along with the trained weights and the test dataset.
-If you found this repository useful, please consider citing our paper [[arXiv](https://arxiv.org/abs/2201.06045)].
+We provide the training and testing code for generating CISRNet.
+If you found this repository useful, please check our paper in [[arXiv](https://arxiv.org/abs/2201.06045)].
 
 Our project presentation is available [[here](https://drive.google.com/file/d/1J1DgLb-LlRnwumdKkebopzZoxyDaASFs/view)]
 
